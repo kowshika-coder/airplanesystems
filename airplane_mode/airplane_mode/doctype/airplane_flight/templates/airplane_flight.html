@@ -1,0 +1,21 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<h1>{{ title }}</h1>
+<div>
+    <h1>Flight Details</h1>
+    <ul>
+        {% set assigned_to_doc = frappe.get_doc('Airplane', airplane) %}
+        {% set assigned_to_doc = frappe.get_doc('Airline', assigned_to_doc.airline) %}
+        <li>Airline: {{assigned_to_doc.name}}</li>
+        <li>{{source_airport_code}} -> {{destination_airport_code}}</li>
+        {% set departure_time=frappe.utils.format_date(date_of_departure, "YYYY-MM-d") %}
+        <li>{{departure_time}} | {{time_of_departure}}</li>
+        {% set duration_time= frappe.utils.format_duration(doc.duration) %}
+        <li>Duration: {{duration_time}}</li>
+    </ul>
+    <a href="/web-form/new?flight={{name}}"><button type="button">Book Flight</button></a>
+</div>
+{% endblock %}
+
+<!-- this is a sample default web page template -->

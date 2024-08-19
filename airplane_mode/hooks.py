@@ -133,23 +133,47 @@ app_license = "mit"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"airplane_mode.tasks.all"
-# 	],
-# 	"daily": [
-# 		"airplane_mode.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"airplane_mode.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"airplane_mode.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"airplane_mode.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	# "all": [
+	# 	"airplane_mode.doctype.airplane_ticket.airplane_ticket.Airplane Ticket.gate_update"
+	# ],
+	# "daily": [
+	# 	"airplane_mode.tasks.daily"
+	# ],
+	"hourly": [
+        "airplane_mode.cron_job.check_for_reminder",
+	# 	"airplane_mode.tasks.hourly"
+	],
+	# "weekly": [
+	# 	"airplane_mode.tasks.weekly"
+	# ],
+	# "monthly": [
+	# 	"airplane_mode.tasks.monthly"
+	# ],
+    "cron": {
+        "0 6 * * *":[
+            "airplane_mode.cron_job.check_date_of_expiry",
+            "airplane_mode.airport_shop_management.doctype.contract.contract.update_contract_payment_status"
+		],
+        # "40 15 * * *":[
+        #     "airplane_mode.cron_job.check_date_of_expiry"
+		# ]
+    #     # Run every minute
+    #     "* * * * *": [
+    #     "airplane_mode.airplane_mode.doctype.airplane_ticket.airplane_ticket.Airplane Ticket.gate_update"
+    #     ]
+    }
+}
+
+import frappe
+tenant_notification=frappe.db.get_single_value("Airport Shop Settings","rent_reminders")
+
+
+if tenant_notification == 'Enable':
+    scheduler_events["cron"]["0 6 * * *"].append("airplane_mode.cron_job.send_mail_to_tenant")
+    frappe.db.set_value('Scheduled Job Type', 'contract.update_contract_payment_status', 'stopped', False)
+else:
+    frappe.db.set_value('Scheduled Job Type', 'contract.update_contract_payment_status', 'stopped', True)
 
 # Testing
 # -------

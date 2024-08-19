@@ -1,0 +1,13 @@
+<div>
+	<div>{{ doc.title or doc.name }}</div>
+	<div>{{doc.source_airport_code}} -> {{doc.destination_airport_code}}</div>
+	<div>{% set company_abbreviation = frappe.utils.format_date(doc.date_of_departure, "d MMMM, YYYY") %}
+		{% set duration_time= frappe.utils.format_duration(doc.duration) %}
+		{{company_abbreviation}} | {{doc.time_of_departure}} | {{duration_time}}
+	</div>
+	<div>
+		<a href="{{ doc.route }}">View Flight</a>
+	</div>
+	<br>
+</div>
+<!-- this is a sample default list template -->
