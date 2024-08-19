@@ -24,7 +24,7 @@
                 });
             })
         }
-    })
+    }) 
     //         if (frappe.user_roles.includes("Tenant")) {
     //             const current_date = frappe.datetime.nowdate();
     //             const first_day_current_month = frappe.datetime.get_first_day(current_date);
