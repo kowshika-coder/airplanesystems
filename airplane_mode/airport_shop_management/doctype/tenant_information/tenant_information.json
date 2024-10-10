@@ -25,7 +25,8 @@
   {
    "fieldname": "email_id",
    "fieldtype": "Data",
-   "label": "Email Id"
+   "label": "Email Id",
+   "reqd": 1
   },
   {
    "fieldname": "address",
@@ -62,7 +63,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-12 15:31:09.489403",
+ "modified": "2024-09-13 11:25:32.302940",
  "modified_by": "Administrator",
  "module": "Airport shop management",
  "name": "Tenant Information",

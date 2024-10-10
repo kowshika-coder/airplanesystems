@@ -37,8 +37,7 @@
    "fieldname": "amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Amount",
-   "reqd": 1
+   "label": "Amount"
   },
   {
    "allow_on_submit": 1,
@@ -102,7 +101,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-13 16:13:51.596874",
+ "modified": "2024-08-20 12:17:08.176444",
  "modified_by": "Administrator",
  "module": "Airport shop management",
  "name": "Contract",

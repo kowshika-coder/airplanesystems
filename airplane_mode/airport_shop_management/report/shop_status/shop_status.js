@@ -7,7 +7,6 @@ frappe.query_reports["Shop status"] = {
             "fieldname": "airport_name",
             "label": __("Airport"),
             "fieldtype": "Data",
-            "hidden": 1,
 			"default": frappe.get_route()[2] || null
         }
     ]
