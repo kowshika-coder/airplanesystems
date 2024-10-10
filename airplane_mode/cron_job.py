@@ -52,3 +52,4 @@ def send_loader():
     frappe.enqueue(check_for_reminder,queue='long')
     #frappe.
     print(10)
+    print(11)
