@@ -9,7 +9,8 @@
 
     frappe.ui.form.on('Payment Receipt', {
         refresh: function(frm) {
-            frm.add_custom_button(__('Send Receipt To Tenant'), function() {
+            if(frm.doc.payment_status == "Paid"){
+            frm.add_custom_button(__('Send Payment Receipt To Tenant'), function() {
                 frappe.call({
                     method: 'airplane_mode.airport_shop_management.doctype.payment_receipt.payment_receipt.send_mail_to_tenant',
                     args: {
@@ -23,6 +24,7 @@
                     }
                 });
             })
+        }
         }
     }) 
     //         if (frappe.user_roles.includes("Tenant")) {

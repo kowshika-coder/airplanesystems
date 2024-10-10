@@ -6,7 +6,8 @@ import frappe
 def execute(filters=None):
     airport_name = filters.get("airplane_flight") if filters else None    
     columns = [
-        {"fieldname": "member_id", "label": "Member ID", "fieldtype": "Data"},
+        {"fieldname": "member_id", "label": "Member ID", "fieldtype": "Data","width": 200},
+        {"fieldname": "member_name", "label": "Name", "fieldtype": "Data","width": 200},
         {"fieldname": "role", "label": "Role", "fieldtype": "Data", "width": 200},
     ]
     
@@ -26,8 +27,9 @@ def execute(filters=None):
         members = frappe.db.get_all('Crew Member Item', filters={'parent': airport_name}, fields=['name', 'name1', 'role'])
         for member in members:
             link = f'<a href="/app/crew-member/{member.name1}">{member.name1}</a>'
+            get_name=frappe.get_doc('Crew Member',member.name1)
             get_role=frappe.get_doc('Crew Member Role',member.role)
-            data.append([link, get_role.role])            
+            data.append([link,get_name.first_name, get_role.role])            
             if get_role.role in status_counts:
                 status_counts[get_role.role] += 1
             else:

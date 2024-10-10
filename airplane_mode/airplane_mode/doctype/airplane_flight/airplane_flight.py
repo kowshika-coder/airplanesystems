@@ -25,9 +25,10 @@ def update_gate_num(self):
 	if self.gate_number:
 		records = frappe.get_list('Airplane Ticket', filters={'flight': self.name}, fields=['name'])
 		for rec in records:
+			#frappe.db.set_value('doc_',doc_name,{'':'',})
 			update_gate=frappe.get_doc('Airplane Ticket',rec['name'])
 			update_gate.gate_number=self.gate_number
 			update_gate.gate_status="Assigned"
 			update_gate.save()
-			frappe.db.commit()
+			# frappe.db.commit()
 			frappe.msgprint("Operation was successful!", alert=True)

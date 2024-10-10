@@ -38,6 +38,7 @@ def send_mail_to_tenant():
         subject = "Reminder: Rent Due Soon"
         message = f"Dear {get_tenant.first_name},<br><br>Your rent is on due. Please ensure it is paid on time to avoid any late fees.<br><br>Thank you."
         frappe.sendmail(recipients=email_id,subject=subject,message=message)
+        # frappe.enqueue('send_mail_immediate', recipients=email_id, subject=subject, message=message,queue='long')
 
 
 def check_for_reminder():
@@ -46,3 +47,9 @@ def check_for_reminder():
         frappe.db.set_value('Scheduled Job Type', 'contract.update_contract_payment_status', 'stopped', False)
     else:
         frappe.db.set_value('Scheduled Job Type', 'contract.update_contract_payment_status', 'stopped', True)
+
+def send_loader():
+    frappe.enqueue(check_for_reminder,queue='long')
+    #frappe.
+    print(10)
+    print(11)
